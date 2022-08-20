@@ -52,5 +52,12 @@ describe("StringCalculator", () => {
             const resultValue: number = stringCalculator.add(inputValue);
             expect(resultValue).toBe(expectedValue);
         })
+
+        it('should throw error if entered numbers contains one negative number', () => {
+            const inputValue: string = '1,-2';
+            const expectedErrorMessage: string = `Negatives not allowed : ${inputValue.split(',').filter(currNo => +currNo < 0).join(',')}`;
+            const resultFunc = () => stringCalculator.add(inputValue);
+            expect(resultFunc).toThrowError(expectedErrorMessage);
+        })
     })
 })

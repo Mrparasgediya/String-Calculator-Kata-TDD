@@ -59,5 +59,12 @@ describe("StringCalculator", () => {
             const resultFunc = () => stringCalculator.add(inputValue);
             expect(resultFunc).toThrowError(expectedErrorMessage);
         })
+
+        it('should throw error if entered numbers contains multiple negative numbers', () => {
+            const inputValue: string = "1,-3,-4,-5";
+            const expectedErrorMessage: string = `Negatives not allowed : ${inputValue.split(',').filter(currNo => +currNo < 0).join(',')}`
+            const resultFunc = () => stringCalculator.add(inputValue);
+            expect(resultFunc).toThrowError(expectedErrorMessage);
+        })
     })
 })

@@ -4,6 +4,7 @@ class StringCalculator {
         if (enteredNumbers === "") {
             return 0;
         }
+        return +enteredNumbers;
     }
 }
 export default StringCalculator;

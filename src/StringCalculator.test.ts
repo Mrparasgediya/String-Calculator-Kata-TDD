@@ -15,3 +15,12 @@ it('should return number itself if only one number is entered as argument', () =
     const resultvalue: number = stringCalculator.add(inputValue);
     expect(resultvalue).toBe(expectedValue);
 })
+
+it('should return addition of entered two numbers seperated by ","', () => {
+    const stringCalculator: StringCalculator = new StringCalculator();
+    const inputValue: string = "1,2";
+    const expectedValue: number = inputValue.split(',')
+        .reduce((sum: number, currStrNo: string) => (sum + (+currStrNo)), 0);
+    const resultValue: number = stringCalculator.add(inputValue);
+    expect(resultValue).toBe(expectedValue);
+})

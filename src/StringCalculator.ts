@@ -7,6 +7,9 @@ class StringCalculator {
             const negativeNumbers: number[] = [];
             for (let currStrNo of enteredNumbers.split(",")) {
                 const convertedNo: number = +currStrNo;
+                if (convertedNo > 1000) {
+                    continue;
+                }
                 // check number is negative
                 if (convertedNo < 0) {
                     negativeNumbers.push(convertedNo);

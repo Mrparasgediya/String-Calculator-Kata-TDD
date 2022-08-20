@@ -66,5 +66,12 @@ describe("StringCalculator", () => {
             const resultFunc = () => stringCalculator.add(inputValue);
             expect(resultFunc).toThrowError(expectedErrorMessage);
         })
+
+        it('should return addition of entered numbers that are less then 1000', () => {
+            const inputValue: string = '1,2,3999,5000';
+            const expectedValue: number = getSumFromStringArr(inputValue.split(',').filter(currNo => +currNo < 1000))
+            const resultValue: number = stringCalculator.add(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
     })
 })

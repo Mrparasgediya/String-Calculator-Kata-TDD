@@ -29,5 +29,13 @@ describe("StringCalculator", () => {
             const resultValue: number = stringCalculator.add(inputValue);
             expect(resultValue).toBe(expectedValue);
         })
+
+        it('should return addition of entered unlimited numbers seperated by ","', () => {
+            const inputValue: string = "1,2,3,4,5";
+            const expectedValue: number = inputValue.split(',')
+                .reduce((sum: number, currStrNo: string) => (sum + (+currStrNo)), 0);
+            const resultValue: number = stringCalculator.add(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
     })
 })

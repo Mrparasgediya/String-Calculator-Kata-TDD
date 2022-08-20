@@ -4,16 +4,23 @@ class StringCalculator {
         let sum: number;
         if (enteredNumbers.includes(',')) {
             sum = 0;
+            const negativeNumbers: number[] = [];
             for (let currStrNo of enteredNumbers.split(",")) {
+                const convertedNo: number = +currStrNo;
                 // check number is negative
-                if (+currStrNo < 0)
-                    throw new Error("Negatives not allowed : " + currStrNo)
+                if (convertedNo < 0) {
+                    negativeNumbers.push(convertedNo);
+                    continue;
+                }
                 // check number is alphabet
-                if (isNaN(+currStrNo)) {
+                if (isNaN(convertedNo)) {
                     sum += (currStrNo.charCodeAt(0) - 96);
                 } else {
-                    sum += (+currStrNo);
+                    sum += (convertedNo);
                 }
+            }
+            if (negativeNumbers.length) {
+                throw new Error(`Negatives not allowed : ${negativeNumbers.join(',')}`)
             }
         } else {
             sum = +enteredNumbers;

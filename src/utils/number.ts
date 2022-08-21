@@ -10,12 +10,21 @@ export const getNumbersArrayFromStringArray = (stringArr: string[]): number[] =>
     });
 }
 
-export const getSumOfElementsByAdditionMethod = (arr: number[], additionMethod: AdditionMethods = AdditionMethods.DEFAULT): number => {
+export const getSumOfElementsByAdditionMethod = (arr: number[], additionMethod: AdditionMethods = AdditionMethods.DEFAULT, hasMaxValue: boolean = false, maxValue: number = 0): number => {
     let startIdx: 0 | 1 = additionMethod == AdditionMethods.ODD ? 1 : 0;
     let incrementValue: 1 | 2 = (additionMethod === AdditionMethods.ODD || additionMethod === AdditionMethods.EVEN) ? 2 : 1;
     let sum: number = 0;
-    for (let i = startIdx; i < arr.length; i += incrementValue) {
-        sum += arr[i];
+    if (hasMaxValue) {
+        for (let i = startIdx; i < arr.length; i += incrementValue) {
+            if (arr[i] <= maxValue) {
+                sum += arr[i];
+            }
+        }
+    }
+    else {
+        for (let i = startIdx; i < arr.length; i += incrementValue) {
+            sum += arr[i];
+        }
     }
     return sum;
 }

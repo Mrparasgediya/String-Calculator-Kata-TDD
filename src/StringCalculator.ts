@@ -1,5 +1,5 @@
 import { AdditionMethods } from './types/StringCalculator'
-import { getNumbersArrayFromStringArray } from './utils/number';
+import { getNumbersArrayFromStringArray, getSumOfElementsByAdditionMethod } from './utils/number';
 import { getAdditionMethod, getArrayFromString, getDelimitersArr } from './utils/string';
 
 class StringCalculator {
@@ -32,20 +32,8 @@ class StringCalculator {
         if (negativeNumbers.length) {
             throw new Error(`Negatives not allowed : ${negativeNumbers.join(',')}`)
         }
-
-        // calculate sum by using reduce method
-        return enteredNumbersArr.reduce((sum: number, currentNo: number, currIdx: number): number => {
-            // return if addition method is odd and index is even
-            if (currentAdditionMethod === AdditionMethods.ODD && (currIdx % 2 === 0)) {
-                return sum;
-            }
-            if (currentAdditionMethod === AdditionMethods.EVEN && (currIdx % 2 !== 0)) {
-                return sum;
-            }
-            // skip stpes if number is greater then 1000
-            if (currentNo > 1000) { return sum; }
-            return (sum + currentNo);
-        }, 0)
+        // get sum of elements which are less then 1000 according to current addition method
+        return getSumOfElementsByAdditionMethod(enteredNumbersArr, currentAdditionMethod, true, 1000);
     }
 }
 export default StringCalculator;

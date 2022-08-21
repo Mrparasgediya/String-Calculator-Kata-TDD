@@ -1,22 +1,17 @@
 import { AdditionMethods } from './types/StringCalculator'
-import { getArrayFromString, getDelimitersArr } from './utils/string';
+import { getAdditionMethod, getArrayFromString, getDelimitersArr } from './utils/string';
 
 class StringCalculator {
 
     public add(numbers: string): number {
 
-        let currentAdditionMethod: AdditionMethods = AdditionMethods.DEFAULT
         let enteredNumbers: string = numbers.trim();
         let sum: number = 0;
         const negativeNumbers: number[] = [];
+        const currentAdditionMethod: AdditionMethods = getAdditionMethod(enteredNumbers);
 
-        if (enteredNumbers.startsWith('0//')) {
-            currentAdditionMethod = AdditionMethods.ODD;
-            enteredNumbers = enteredNumbers.substring(1);
-        }
-
-        if (enteredNumbers.startsWith('1//')) {
-            currentAdditionMethod = AdditionMethods.EVEN;
+        // remove first 0 or 1 from entered string
+        if (enteredNumbers.startsWith('0//') || enteredNumbers.startsWith('1//')) {
             enteredNumbers = enteredNumbers.substring(1);
         }
 

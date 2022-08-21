@@ -73,5 +73,11 @@ describe('string utils', () => {
             const resultValue: AdditionMethods = getAdditionMethod(inputValue);
             expect(resultValue).toBe(expectedValue);
         })
+        it('should return DEFAULT addition method if entered string do not starts "0//" nor "1//"', () => {
+            const inputValue: string = "//";
+            const expectedValue: AdditionMethods = AdditionMethods.DEFAULT;
+            const resultValue: AdditionMethods = getAdditionMethod(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
     })
 })

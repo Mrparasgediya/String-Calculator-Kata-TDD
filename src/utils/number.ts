@@ -11,7 +11,7 @@ export const getNumbersArrayFromStringArray = (stringArr: string[]): number[] =>
 }
 
 export const getSumOfElementsByAdditionMethod = (arr: number[], additionMethod: AdditionMethods = AdditionMethods.DEFAULT): number => {
-    let startIdx: 0 | 2 = 0;
+    let startIdx: 0 | 1 = additionMethod == AdditionMethods.ODD ? 1 : 0;
     let sum: number = 0;
     for (let i = startIdx; i < arr.length; i += 2) {
         sum += arr[i];

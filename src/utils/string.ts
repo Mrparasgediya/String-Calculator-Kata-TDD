@@ -1,3 +1,4 @@
+import { AdditionMethods } from "../types/StringCalculator";
 
 export const getDelimitersArr = (string: string = '', defaultDelimiter: string = ","): string[] => {
     const delimitersArr: string[] = [];
@@ -43,4 +44,11 @@ export const getArrayFromString = (numbersString: string, delimitersArr: string[
     }
     // console.log(numbersArr);
     return numbersArr;
+}
+
+export const getAdditionMethod = (string: string): AdditionMethods => {
+    if (string.startsWith('0//')) {
+        return AdditionMethods.ODD;
+    }
+    return AdditionMethods.DEFAULT;
 }

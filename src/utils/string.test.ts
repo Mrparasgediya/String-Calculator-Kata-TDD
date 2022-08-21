@@ -1,4 +1,5 @@
-import { getDelimitersArr, getArrayFromString } from './string'
+import { getDelimitersArr, getArrayFromString, getAdditionMethod } from './string'
+import { AdditionMethods } from '../types/StringCalculator'
 
 describe('string utils', () => {
     describe('getDelimitersArr', () => {
@@ -56,6 +57,15 @@ describe('string utils', () => {
             const expectedValue: string[] = [numbersString];
             const resultvalue: string[] = getArrayFromString(numbersString, delimitersArr);
             expect(resultvalue).toEqual(expectedValue);
+        })
+    })
+
+    describe('getAdditionMethod', () => {
+        it('should return ODD addition method if entered string starts with "0//"', () => {
+            const inputValue: string = "0//";
+            const expectedValue: AdditionMethods = AdditionMethods.ODD;
+            const resultValue: AdditionMethods = getAdditionMethod(inputValue);
+            expect(resultValue).toBe(resultValue);
         })
     })
 })

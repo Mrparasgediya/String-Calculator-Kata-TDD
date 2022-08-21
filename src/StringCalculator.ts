@@ -1,4 +1,5 @@
 import { AdditionMethods } from './types/StringCalculator'
+import { getDelimitersArr } from './utils/string';
 
 class StringCalculator {
 
@@ -7,7 +8,6 @@ class StringCalculator {
         let currentAdditionMethod: AdditionMethods = AdditionMethods.DEFAULT
         let enteredNumbers: string = numbers.trim();
         let sum: number = 0;
-        const delimiters: string[] = [];
         const negativeNumbers: number[] = [];
 
         if (enteredNumbers.startsWith('0//')) {
@@ -20,26 +20,11 @@ class StringCalculator {
             enteredNumbers = enteredNumbers.substring(1);
         }
 
+        const delimiters: string[] = getDelimitersArr(enteredNumbers);
         // extract delimiter from entered numbers string
         if (enteredNumbers.startsWith('//')) {
-            // extract delimiter
-            const delimiterBox: string = enteredNumbers.substring(2, enteredNumbers.indexOf('\n'));
-            // add custom delimiter to delimiters arr
-            if (delimiterBox.startsWith('[') && delimiterBox.endsWith(']')) {
-                delimiters.push(delimiterBox.substring(1, delimiterBox.indexOf(']')));
-            } else {
-                delimiters.push(delimiterBox);
-            }
             // remove delimiter string from entered numbers
             enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1);
-        } else {
-            // add default delimiter to delimiters arr
-            delimiters.push(',');
-        }
-
-        // add \n delimiter delimiters arr if string contains\n
-        if (enteredNumbers.includes('\n')) {
-            delimiters.push('\n');
         }
 
         // make array from entered numbers by splitting with first delimiter

@@ -22,4 +22,25 @@ export const getDelimitersArr = (string: string = '', defaultDelimiter: string =
         delimitersArr.unshift('\n');
     }
     return delimitersArr;
-} 
+}
+
+export const getArrayFromString = (numbersString: string, delimitersArr: string[]): string[] => {
+    let numbersArr: string[] = numbersString.split(delimitersArr[0]);
+    // iterate over all delimiters from second delimiter and add it to numbers array
+    for (let i = 1; i < delimitersArr.length; i++) {
+        const currDelimiter = delimitersArr[i];
+        let tempNumbersArr: string[] = [];
+        for (let currNumber of numbersArr) {
+            if (currNumber.includes(currDelimiter)) {
+                // add current number split array in numbers array
+                tempNumbersArr = [...tempNumbersArr, ...(currNumber.split(currDelimiter))];
+            } else {
+                tempNumbersArr.push(currNumber);
+            }
+        }
+        // change numbers arr to numbersArr
+        numbersArr = tempNumbersArr;
+    }
+    // console.log(numbersArr);
+    return numbersArr;
+}

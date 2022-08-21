@@ -10,7 +10,7 @@ describe('string utils', () => {
 
         it('should return array with delimiter \\n and default delimiter if entered string contains \\n', () => {
             const inputValue: string = "\n1,2";
-            const expectedValue: string[] = [",", "\n"];
+            const expectedValue: string[] = ["\n", ","];
             const resultValue: string[] = getDelimitersArr(inputValue);
             expect(resultValue).toEqual(expectedValue);
         })

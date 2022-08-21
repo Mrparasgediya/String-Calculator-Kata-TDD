@@ -1,21 +1,29 @@
+enum AdditionMethods {
+    DEFAULT,
+    EVEN,
+    ODD
+}
+
 class StringCalculator {
 
     public add(numbers: string): number {
-        enum additionMethods {
-            DEFAULT,
-            EVEN,
-            ODD
-        }
-        let currentAdditionMethod: additionMethods = additionMethods.DEFAULT
+
+        let currentAdditionMethod: AdditionMethods = AdditionMethods.DEFAULT
         let enteredNumbers: string = numbers.trim();
         let sum: number = 0;
         const delimiters: string[] = [];
         const negativeNumbers: number[] = [];
 
         if (enteredNumbers.startsWith('0//')) {
-            currentAdditionMethod = additionMethods.ODD;
+            currentAdditionMethod = AdditionMethods.ODD;
             enteredNumbers = enteredNumbers.substring(1);
         }
+
+        if (enteredNumbers.startsWith('1//')) {
+            currentAdditionMethod = AdditionMethods.EVEN;
+            enteredNumbers = enteredNumbers.substring(1);
+        }
+
         // extract delimiter from entered numbers string
         if (enteredNumbers.startsWith('//')) {
             // extract delimiter
@@ -55,7 +63,11 @@ class StringCalculator {
         // calculate sum by using reduce method
         sum = enteredNumbersArr.reduce((sum, currStrNo, currIdx) => {
             // return if addition method is odd and index is even
-            if (currentAdditionMethod === additionMethods.ODD && (currIdx % 2 === 0)) {
+            if (currentAdditionMethod === AdditionMethods.ODD && (currIdx % 2 === 0)) {
+                return sum;
+            }
+
+            if (currentAdditionMethod === AdditionMethods.EVEN && (currIdx % 2 !== 0)) {
                 return sum;
             }
             // convert string number to number

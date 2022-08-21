@@ -89,5 +89,14 @@ describe("StringCalculator", () => {
             const resultValue: number = stringCalculator.add(inputValue);
             expect(resultValue).toBe(expectedValue);
         })
+
+        it('should return addition of numbers with entered delimiter like "//[delimiter]\\n[numbers…]" and delimiter length is unlimited', () => {
+            const delimiter: string = "***";
+            const stringNumbers: string = `1${delimiter}2${delimiter}3`;
+            const inputValue: string = `//[${delimiter}]\n${stringNumbers}`;
+            const expectedValue: number = getSumFromStringArr(stringNumbers.split(delimiter));
+            const resultValue: number = stringCalculator.add(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
     })
 })

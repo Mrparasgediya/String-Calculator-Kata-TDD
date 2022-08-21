@@ -50,5 +50,8 @@ export const getAdditionMethod = (string: string): AdditionMethods => {
     if (string.startsWith('0//')) {
         return AdditionMethods.ODD;
     }
+    if (string.startsWith("1//")) {
+        return AdditionMethods.EVEN;
+    }
     return AdditionMethods.DEFAULT;
 }

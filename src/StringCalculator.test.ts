@@ -113,5 +113,20 @@ describe("StringCalculator", () => {
             const resultValue: number = stringCalculator.add(inputValue);
             expect(resultValue).toBe(expectedValue);
         })
+
+        it('should return addition of even indices if string starts with "1//"', () => {
+            const delimiter: string = '***';
+            const stringNumbers: string = `1${delimiter}2${delimiter}3${delimiter}`
+            const inputValue: string = `1//${delimiter}\n${stringNumbers}`
+            const expectedValue: number = stringNumbers.split(delimiter)
+                .reduce(
+                    (sum: number, currStrNo: string, currIdx) =>
+                        currIdx % 2 === 0
+                            ? (sum + (+currStrNo))
+                            : sum
+                    , 0)
+            const resultValue: number = stringCalculator.add(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
     })
 })

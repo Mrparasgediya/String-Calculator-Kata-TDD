@@ -4,7 +4,7 @@
   "description": "String Calculator With TDD Jest",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "keywords": [],
   "author": "",

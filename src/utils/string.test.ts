@@ -1,4 +1,4 @@
-import { getDelimitersArr } from './string'
+import { getDelimitersArr, getArrayFromString } from './string'
 
 describe('string utils', () => {
     describe('getDelimitersArr', () => {
@@ -29,4 +29,26 @@ describe('string utils', () => {
             expect(resultValue).toEqual(expectedValue);
         })
     });
+
+    describe('getArrayFromString', () => {
+        it('should return array if string contains delimiters', () => {
+            const delimitersArr: string[] = ["\n", "=="];
+            const numbersString: string = "1==2\n4==3==4";
+            const expectedValue: string[] = numbersString
+                .split(delimitersArr[0])
+                .reduce(
+                    (arr: string[], currStr: string) =>
+                        [
+                            ...arr,
+                            ...(
+                                currStr.includes(delimitersArr[1])
+                                    ? (currStr.split(delimitersArr[1]))
+                                    : [currStr]
+                            )
+                        ],
+                    [])
+            const resultValue: string[] = getArrayFromString(numbersString, delimitersArr);
+            expect(resultValue).toEqual(expectedValue);
+        })
+    })
 })

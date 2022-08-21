@@ -5,7 +5,15 @@ class StringCalculator {
         if (enteredNumbers.includes(',')) {
             sum = 0;
             const negativeNumbers: number[] = [];
-            for (let currStrNo of enteredNumbers.split(",")) {
+            const enteredNumbersArr: string[] = enteredNumbers.split(",")
+                .reduce(
+                    (arr: string[], currStrNo: string) =>
+                        [...arr,
+                        ...(currStrNo.includes('\n')
+                            ? currStrNo.split('\n')
+                            : [currStrNo])
+                        ], []);
+            for (let currStrNo of enteredNumbersArr) {
                 const convertedNo: number = +currStrNo;
                 if (convertedNo > 1000) {
                     continue;

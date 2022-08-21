@@ -1,11 +1,20 @@
 class StringCalculator {
     public add(numbers: string): number {
-        const enteredNumbers: string = numbers.trim();
+        let enteredNumbers: string = numbers.trim();
         let sum: number;
-        if (enteredNumbers.includes(',')) {
+        let delimiter: string = ',';
+
+        // extract delimiter from entered numbers string
+        if (enteredNumbers.startsWith('//')) {
+            delimiter = enteredNumbers.substring(2, enteredNumbers.indexOf('\n'));
+            // remove delimiter string from entered numbers
+            enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1)
+        }
+
+        if (enteredNumbers.includes(delimiter)) {
             sum = 0;
             const negativeNumbers: number[] = [];
-            const enteredNumbersArr: string[] = enteredNumbers.split(",")
+            const enteredNumbersArr: string[] = enteredNumbers.split(delimiter)
                 .reduce(
                     (arr: string[], currStrNo: string) =>
                         [...arr,

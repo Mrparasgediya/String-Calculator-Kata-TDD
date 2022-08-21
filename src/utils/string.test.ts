@@ -14,5 +14,12 @@ describe('string utils', () => {
             const resultValue: string[] = getDelimitersArr(inputValue);
             expect(resultValue).toEqual(expectedValue);
         })
+
+        it('should return array of delimiter from entered string if it starts with "//delimiter\\n[numbers...]"', () => {
+            const inputValue: string = "//:\n1:2:3";
+            const expectedValue: string[] = [":"];
+            const resultValue: string[] = getDelimitersArr(inputValue);
+            expect(resultValue).toEqual(expectedValue);
+        })
     });
 })

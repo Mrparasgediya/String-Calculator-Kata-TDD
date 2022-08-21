@@ -17,8 +17,9 @@ export const getDelimitersArr = (string: string = '', defaultDelimiter: string =
     } else {
         delimitersArr.push(defaultDelimiter);
     }
+
     if (enteredString.includes("\n")) {
-        delimitersArr.push('\n');
+        delimitersArr.unshift('\n');
     }
     return delimitersArr;
 } 

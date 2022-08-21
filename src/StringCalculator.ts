@@ -6,9 +6,15 @@ class StringCalculator {
 
         // extract delimiter from entered numbers string
         if (enteredNumbers.startsWith('//')) {
-            delimiter = enteredNumbers.substring(2, enteredNumbers.indexOf('\n'));
+            // extract delimiter
+            const delimiterBox: string = enteredNumbers.substring(2, enteredNumbers.indexOf('\n'));
+            if (delimiterBox.startsWith('[') && delimiterBox.endsWith(']')) {
+                delimiter = delimiterBox.substring(1, delimiterBox.indexOf(']'));
+            } else {
+                delimiter = delimiterBox;
+            }
             // remove delimiter string from entered numbers
-            enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1)
+            enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1);
         }
 
         if (enteredNumbers.includes(delimiter)) {

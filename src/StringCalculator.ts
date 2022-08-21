@@ -1,4 +1,5 @@
 import { AdditionMethods } from './types/StringCalculator'
+import { getNumbersArrayFromStringArray } from './utils/number';
 import { getAdditionMethod, getArrayFromString, getDelimitersArr } from './utils/string';
 
 class StringCalculator {
@@ -6,8 +7,6 @@ class StringCalculator {
     public add(numbers: string): number {
 
         let enteredNumbers: string = numbers.trim();
-        let sum: number = 0;
-        const negativeNumbers: number[] = [];
         const currentAdditionMethod: AdditionMethods = getAdditionMethod(enteredNumbers);
 
         // remove first 0 or 1 from entered string
@@ -22,36 +21,31 @@ class StringCalculator {
             enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1);
         }
 
-        // get numbers array
-        let enteredNumbersArr: string[] = getArrayFromString(enteredNumbers, delimiters)
+        // get numbers array in string
+        const enteredNumbersStringArr: string[] = getArrayFromString(enteredNumbers, delimiters)
+        // convert numbers string array to numbers array
+        const enteredNumbersArr: number[] = getNumbersArrayFromStringArray(enteredNumbersStringArr);
+
+        // get negative numbers
+        const negativeNumbers: number[] = enteredNumbersArr.filter(currNo => currNo < 0);
+        // throw error if negative numbers encountered
+        if (negativeNumbers.length) {
+            throw new Error(`Negatives not allowed : ${negativeNumbers.join(',')}`)
+        }
 
         // calculate sum by using reduce method
-        sum = enteredNumbersArr.reduce((sum, currStrNo, currIdx) => {
+        return enteredNumbersArr.reduce((sum: number, currentNo: number, currIdx: number): number => {
             // return if addition method is odd and index is even
             if (currentAdditionMethod === AdditionMethods.ODD && (currIdx % 2 === 0)) {
                 return sum;
             }
-
             if (currentAdditionMethod === AdditionMethods.EVEN && (currIdx % 2 !== 0)) {
                 return sum;
             }
-            // convert string number to number
-            const convertedNo: number = +currStrNo;
             // skip stpes if number is greater then 1000
-            if (convertedNo > 1000) { return sum; }
-            // add negativenumbers to array if no is negative
-            if (convertedNo < 0) {
-                negativeNumbers.push(convertedNo);
-                return sum;
-            }
-            return isNaN(convertedNo) ? (sum + (currStrNo.charCodeAt(0) - 96)) : (sum + convertedNo);
+            if (currentNo > 1000) { return sum; }
+            return (sum + currentNo);
         }, 0)
-
-        // check if there is negative numbers
-        if (negativeNumbers.length) {
-            throw new Error(`Negatives not allowed : ${negativeNumbers.join(',')}`)
-        }
-        return sum;
     }
 }
 export default StringCalculator;

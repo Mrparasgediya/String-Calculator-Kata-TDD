@@ -1,8 +1,4 @@
-enum AdditionMethods {
-    DEFAULT,
-    EVEN,
-    ODD
-}
+import { AdditionMethods } from './types/StringCalculator'
 
 class StringCalculator {
 

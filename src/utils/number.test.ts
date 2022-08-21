@@ -25,5 +25,11 @@ describe('number utils', () => {
             const resultValue: number = getSumOfElementsByAdditionMethod(inputValue, AdditionMethods.EVEN);
             expect(resultValue).toBe(expectedValue);
         })
+        it('should return sum of odd index numbers if addition method is ODD', () => {
+            const inputValue: number[] = [1, 2, 3, 4];
+            const expectedValue: number = 6;
+            const resultValue: number = getSumOfElementsByAdditionMethod(inputValue, AdditionMethods.ODD);
+            expect(resultValue).toBe(expectedValue)
+        })
     })
 })

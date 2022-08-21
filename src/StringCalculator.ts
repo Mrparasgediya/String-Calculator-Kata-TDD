@@ -1,5 +1,5 @@
 import { AdditionMethods } from './types/StringCalculator'
-import { getDelimitersArr } from './utils/string';
+import { getArrayFromString, getDelimitersArr } from './utils/string';
 
 class StringCalculator {
 
@@ -27,19 +27,8 @@ class StringCalculator {
             enteredNumbers = enteredNumbers.substring(enteredNumbers.indexOf('\n') + 1);
         }
 
-        // make array from entered numbers by splitting with first delimiter
-        let enteredNumbersArr: string[] = enteredNumbers.split(delimiters[0]);
-        // create array which has items that do not contain delimiters
-        for (let i = 1; i < delimiters.length; i++) {
-            for (let currStrNumber of enteredNumbersArr) {
-                if (currStrNumber.includes(delimiters[i])) {
-                    // remove current element from enteredNumbersArr if it contains delimiter
-                    enteredNumbersArr.splice(enteredNumbersArr.indexOf(currStrNumber), 1);
-                    // add splitted current number by current delimiter
-                    enteredNumbersArr = [...enteredNumbersArr, ...(currStrNumber.split(delimiters[i]))]
-                }
-            }
-        }
+        // get numbers array
+        let enteredNumbersArr: string[] = getArrayFromString(enteredNumbers, delimiters)
 
         // calculate sum by using reduce method
         sum = enteredNumbersArr.reduce((sum, currStrNo, currIdx) => {

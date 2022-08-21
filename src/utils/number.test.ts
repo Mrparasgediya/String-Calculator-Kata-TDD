@@ -36,5 +36,11 @@ describe('number utils', () => {
             const resultValue: number = getSumOfElementsByAdditionMethod(inputValue, AdditionMethods.DEFAULT);
             expect(resultValue).toBe(expectedValue)
         })
+        it('should return sum of numbers if hasMaxValue is entered then less and equal then maxValue', () => {
+            const inputValue: number[] = [1, 2, 1002, 5000];
+            const expectedValue: number = 3;
+            const resultValue: number = getSumOfElementsByAdditionMethod(inputValue, AdditionMethods.DEFAULT, true, 1000);
+            expect(resultValue).toBe(expectedValue)
+        })
     })
 })

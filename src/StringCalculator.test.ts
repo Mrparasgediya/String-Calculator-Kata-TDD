@@ -74,9 +74,18 @@ describe("StringCalculator", () => {
             expect(resultValue).toBe(expectedValue);
         })
 
-        it('should return addidiont of numbers which are seperated by "," or "\\n"', () => {
+        it('should return addition of numbers which are seperated by "," or "\\n"', () => {
             const inputValue: string = "1\n2,3";
             const expectedValue: number = getSumFromStringArr(inputValue.split(',').reduce((arr: string[], currStrNo: string) => [...arr, ...(currStrNo.includes('\n') ? currStrNo.split('\n') : [currStrNo])], []))
+            const resultValue: number = stringCalculator.add(inputValue);
+            expect(resultValue).toBe(expectedValue);
+        })
+
+        it('should return addition of numbers with entered delimiter like "//[delimiter]\\n[numbers…]" and delimiter length is 1', () => {
+            const stringNumbers: string = "1;2;3";
+            const delimiter: string = ";";
+            const inputValue: string = `//${delimiter}\n${stringNumbers}`;
+            const expectedValue: number = getSumFromStringArr(stringNumbers.split(delimiter));
             const resultValue: number = stringCalculator.add(inputValue);
             expect(resultValue).toBe(expectedValue);
         })

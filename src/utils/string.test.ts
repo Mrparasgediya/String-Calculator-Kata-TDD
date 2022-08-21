@@ -65,7 +65,13 @@ describe('string utils', () => {
             const inputValue: string = "0//";
             const expectedValue: AdditionMethods = AdditionMethods.ODD;
             const resultValue: AdditionMethods = getAdditionMethod(inputValue);
-            expect(resultValue).toBe(resultValue);
+            expect(resultValue).toBe(expectedValue);
+        })
+        it('should return EVEN addition method if entered string starts with "1//"', () => {
+            const inputValue: string = "1//";
+            const expectedValue: AdditionMethods = AdditionMethods.EVEN;
+            const resultValue: AdditionMethods = getAdditionMethod(inputValue);
+            expect(resultValue).toBe(expectedValue);
         })
     })
 })

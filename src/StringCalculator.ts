@@ -1,10 +1,21 @@
 class StringCalculator {
+
     public add(numbers: string): number {
+        enum additionMethods {
+            DEFAULT,
+            EVEN,
+            ODD
+        }
+        let currentAdditionMethod: additionMethods = additionMethods.DEFAULT
         let enteredNumbers: string = numbers.trim();
         let sum: number = 0;
         const delimiters: string[] = [];
         const negativeNumbers: number[] = [];
 
+        if (enteredNumbers.startsWith('0//')) {
+            currentAdditionMethod = additionMethods.ODD;
+            enteredNumbers = enteredNumbers.substring(1);
+        }
         // extract delimiter from entered numbers string
         if (enteredNumbers.startsWith('//')) {
             // extract delimiter
@@ -42,7 +53,11 @@ class StringCalculator {
         }
 
         // calculate sum by using reduce method
-        sum = enteredNumbersArr.reduce((sum, currStrNo) => {
+        sum = enteredNumbersArr.reduce((sum, currStrNo, currIdx) => {
+            // return if addition method is odd and index is even
+            if (currentAdditionMethod === additionMethods.ODD && (currIdx % 2 === 0)) {
+                return sum;
+            }
             // convert string number to number
             const convertedNo: number = +currStrNo;
             // skip stpes if number is greater then 1000

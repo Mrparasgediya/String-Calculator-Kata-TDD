@@ -50,5 +50,12 @@ describe('string utils', () => {
             const resultValue: string[] = getArrayFromString(numbersString, delimitersArr);
             expect(resultValue).toEqual(expectedValue);
         })
+        it('should return array contains only entered string if delimiter is no matched', () => {
+            const delimitersArr: string[] = ["\n", "=="];
+            const numbersString: string = "1=2=4=3=4";
+            const expectedValue: string[] = [numbersString];
+            const resultvalue: string[] = getArrayFromString(numbersString, delimitersArr);
+            expect(resultvalue).toEqual(expectedValue);
+        })
     })
 })

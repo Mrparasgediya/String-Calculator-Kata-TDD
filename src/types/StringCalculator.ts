@@ -1,5 +1,5 @@
 export enum AdditionMethods {
-    DEFAULT,
-    EVEN,
-    ODD
+    EVEN = 0,
+    ODD = 1,
+    DEFAULT = 3,
 }

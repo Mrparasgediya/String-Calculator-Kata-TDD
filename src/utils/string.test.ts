@@ -35,19 +35,7 @@ describe('string utils', () => {
         it('should return array if string contains delimiters', () => {
             const delimitersArr: string[] = ["\n", "=="];
             const numbersString: string = "1==2\n4==3==4";
-            const expectedValue: string[] = numbersString
-                .split(delimitersArr[0])
-                .reduce(
-                    (arr: string[], currStr: string) =>
-                        [
-                            ...arr,
-                            ...(
-                                currStr.includes(delimitersArr[1])
-                                    ? (currStr.split(delimitersArr[1]))
-                                    : [currStr]
-                            )
-                        ],
-                    [])
+            const expectedValue: string[] = ["1", "2", "4", "3", "4"];
             const resultValue: string[] = getArrayFromString(numbersString, delimitersArr);
             expect(resultValue).toEqual(expectedValue);
         })
